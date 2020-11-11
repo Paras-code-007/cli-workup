@@ -106,4 +106,7 @@ dist
 # User files
 term.txt
 todos.md
+
+todos.json
+.todo/todos.json
 .todo
