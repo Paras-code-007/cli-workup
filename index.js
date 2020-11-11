@@ -79,5 +79,3 @@ const FileSync= require('lowdb/adapters/FileSync')
     }
 
 })()
-
-
