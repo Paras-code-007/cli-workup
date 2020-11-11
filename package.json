@@ -34,6 +34,7 @@
         "cli-display-error": "^0.1.0",
         "cli-welcome": "^2.2.2",
         "clialerting": "^1.0.1",
+        "enquirer": "^2.3.6",
         "lowdb": "^1.0.0",
         "make-dir": "^3.1.0",
         "meow": "^8.0.0",

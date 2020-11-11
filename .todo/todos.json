@@ -1,1 +1,13 @@
-{}
+{
+  "todos": [
+    {
+      "title": "some task1"
+    },
+    {
+      "title": "some task2"
+    },
+    {
+      "title": "some task3"
+    }
+  ]
+}
