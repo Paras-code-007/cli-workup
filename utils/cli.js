@@ -18,7 +18,10 @@ ${cyan('--help')}            : for help
 ${cyan('--version')},${cyan(' -V')}     : for pkg/CLI version
 
 Inputs/Commands
-${yellow('help')}              : for help
+${yellow('add')}               : for adding a todo to the list
+${yellow('ls')}                : for listing all the todos in list
+${yellow('del')}               : for deleting multiple todos from the list
+${yellow('help')}              : for help and info about cli
 
 Examples
 use --no-flag or -alias-f to set these flags to false

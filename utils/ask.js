@@ -13,7 +13,8 @@ module.exports= async ({message,hint })=>{  //destructuring message hint and fro
         }
     })
     .on('cancel',()=>{
-        console.log("Cancelled")
+        console.log(`${magenta.bold('❯ Cancelled')}`)
+        process.exit(0);
     })
     .run())
 

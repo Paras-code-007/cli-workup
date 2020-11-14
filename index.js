@@ -10,6 +10,7 @@ const init = require('./utils/init')
 const cli= require('./utils/cli')
 const debug= require('./utils/debug')
 const ask = require('./utils/ask')
+const multiselect= require('./utils/multiselect')
 
 //modules
 const path= require('path')
@@ -21,6 +22,7 @@ const alert=require('clialerting')
 const {dim: d, yellowBright: y, green: g}= require('chalk')
 
 //local database setup
+//database can be anything firebase/firestore/mongodb db/sql db anything
 const low= require('lowdb')
 const dbtodosPath= path.join(process.cwd(), './.todo/todos.json')
 const FileSync= require('lowdb/adapters/FileSync')
@@ -74,9 +76,55 @@ const FileSync= require('lowdb/adapters/FileSync')
         // db.get('key')  //returns the key in the db defined using filesync adapter which is adapter to a single local file database
         // db.get('todos').push()  //push property is used to push to something into this array
         // db.get('todos').push({title: 'hello world'}).write()   //to write the todos key into the database db
-        db.get('todos').push({title: task}).write()  //.write function to write the todos key/array into db
+        task && db.get('todos').push({title: task}).write()  //.write function to write the todos key/array into db
         alert({type: 'success', msg: 'Successfully', name: 'Added'})
     }
+
+    if(cli.input.includes('del')){
+        // const arr= db.get('todos').value().filter(function (val,i) {
+        //     return Object.keys(val).length !== 0
+        // })
+        // const arr= db.get('todos').remove(function (val) {
+        //     console.log(val)
+        //     return Object.keys(val).length === 0
+        // }) //!not work
+
+        // const arr= db.get('todos').remove('{}')
+        // const arr= db.get('todos').filter({title: 'some task 10'}).value()
+        // const arr= db.get('todos').remove({title: undefined})
+        // const arr= db.get('todos').compact().value()
+        // const arr= db.get('todos').remove({title: null}).write()
+
+        const arr= db.get('todos').value().filter(function (val,i) {
+            return Object.keys(val).length !== 0
+        })
+
+        const arr2= db.set('todos', arr).write()
+
+        // console.log('arr2', arr2)
+
+        // console.log(arr)
+        // console.log(typeof arr)
+
+        // const todolist= db.get('todos').value()
+        // console.log(todolist)
+        const tododels= await multiselect({message: 'Select to delete finished tasks', choices: arr})
+        // console.log('Delete tasks: ', tododels)
+
+        // arr2.remove(tododels).write()
+
+        tododels.map(function (val) {
+            db.get('todos').remove({title: val}).write()
+        })
+
+        // tododels.map(function (val) {
+            
+        // })
+
+    }
+
+    
+
 
 })()
 
